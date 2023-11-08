@@ -23,6 +23,9 @@ provider "aws" {
   region  = var.region
   access_key = data.hcp_vault_secrets_app.aws_app.AWS_ACCESS_KEY_ID
   secret_key = data.hcp_vault_secrets_app.aws_app.AWS_SECRET_ACCESS_KEY
+  data "hcp_vault_secrets_app" "aws_app" {
+    app_name = "hashicat"
+  }
 }
 
 resource "aws_vpc" "hashicat" {
