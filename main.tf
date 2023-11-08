@@ -4,9 +4,15 @@ terraform {
       source  = "hashicorp/aws"
       version = "=3.42.0"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0.76.0"
+    }
   }
-}
 
+  }
+
+provider "hcp" {}
 data "hcp_vault_secrets_app" "aws_app" {
   app_name = "hashicat"
 }
