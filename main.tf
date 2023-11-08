@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+data "hcp_vault_secrets_app" "aws_app" {
+  app_name = "hashicat"
+}
+
 provider "aws" {
   region  = var.region
 }
