@@ -12,8 +12,8 @@ terraform {
 
   }
 
-provider "hcp" {
-}
+#cant get provider now?
+provider "hcp" {}
 
 data "hcp_vault_secrets_app" "aws_app" {
   app_name = "hashicat"
