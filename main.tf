@@ -15,6 +15,10 @@ terraform {
 provider "hcp" {
 }
 
+data "hcp_vault_secrets_app" "aws_app" {
+  app_name = "hashicat"
+}
+
 data "hcp_vault_secrets_secret" "aws_app" {
   app_name = "hashicat"
   secret_name = "AWS_ACCESS_KEY_ID"
