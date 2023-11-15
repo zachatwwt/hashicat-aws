@@ -4,32 +4,30 @@ terraform {
       source  = "hashicorp/aws"
       version = "=3.42.0"
     }
-    hcp = {
-      source  = "hashicorp/hcp"
-      version = "~> 0.76.0"
-    }
+    #hcp = {
+    #  source  = "hashicorp/hcp"
+    #  version = "~> 0.76.0"
+    #}
   }
 
   }
 
 #cant get provider now?
-provider "hcp" {
-  
-}
+#provider "hcp" {}
 
-data "hcp_vault_secrets_app" "aws_app" {
-  app_name = "hashicat"
-}
+#data "hcp_vault_secrets_app" "aws_app" {
+#  app_name = "hashicat"
+#}
 
-data "hcp_vault_secrets_secret" "aws_app" {
-  app_name = "hashicat"
-  secret_name = "AWS_ACCESS_KEY_ID"
-}
+#data "hcp_vault_secrets_secret" "aws_app" {
+#  app_name = "hashicat"
+#  secret_name = "AWS_ACCESS_KEY_ID"
+#}
 
 provider "aws" {
   region  = var.region
-  access_key = data.hcp_vault_secrets_secret.aws_app.secret_value
-  secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
+  #access_key = data.hcp_vault_secrets_secret.aws_app.secret_value
+  #secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
 }
 
 resource "aws_vpc" "hashicat" {
