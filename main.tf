@@ -44,7 +44,7 @@ resource "aws_subnet" "hashicat" {
   cidr_block = var.subnet_prefix
 
   tags = {
-    name = "${var.prefix}-subnet"
+    Name = "${var.prefix}-subnet"
   }
 }
 
