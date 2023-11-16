@@ -128,6 +128,11 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
+  domain = "vpc"
+  depends_on = [aws_internet_gateway.hashicat]
+  tags = {
+    Name = "hashicat_igw_eip"
+  }
   # vpc = true
   # vpc is deprecated and defaults to true, removed
 }
