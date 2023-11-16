@@ -128,7 +128,7 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
-  domain = "vpc"
+  domain = "hashicat"
   depends_on = [aws_internet_gateway.hashicat]
   tags = {
     Name = "hashicat_igw_eip"
