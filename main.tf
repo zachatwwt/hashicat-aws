@@ -29,7 +29,7 @@ provider "aws" {
   #secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
 }
 
-resource "aws_vpc" "hashicat" {
+resource "aws_vpc" "hashicat_vpc" {
   cidr_block           = var.address_space
   enable_dns_hostnames = true
 
@@ -40,7 +40,7 @@ resource "aws_vpc" "hashicat" {
 }
 
 resource "aws_subnet" "hashicat" {
-  vpc_id     = aws_vpc.hashicat.id
+  vpc_id     = aws_vpc.hashicat_vpc.id
   cidr_block = var.subnet_prefix
 
   tags = {
@@ -51,7 +51,7 @@ resource "aws_subnet" "hashicat" {
 resource "aws_security_group" "hashicat" {
   name = "${var.prefix}-security-group"
 
-  vpc_id = aws_vpc.hashicat.id
+  vpc_id = aws_vpc.hashicat_vpc.id
 
   ingress {
     from_port   = 22
@@ -88,7 +88,7 @@ resource "aws_security_group" "hashicat" {
 }
 
 resource "aws_internet_gateway" "hashicat" {
-  vpc_id = aws_vpc.hashicat.id
+  vpc_id = aws_vpc.hashicat_vpc.id
 
   tags = {
     Name = "${var.prefix}-internet-gateway"
@@ -96,7 +96,7 @@ resource "aws_internet_gateway" "hashicat" {
 }
 
 resource "aws_route_table" "hashicat" {
-  vpc_id = aws_vpc.hashicat.id
+  vpc_id = aws_vpc.hashicat_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -128,8 +128,8 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
-  domain = "hashicat"
-  depends_on = [aws_internet_gateway.hashicat]
+  #domain = "hashicat"
+  #depends_on = [aws_internet_gateway.hashicat]
   tags = {
     Name = "hashicat_igw_eip"
   }
