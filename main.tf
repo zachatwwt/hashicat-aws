@@ -129,7 +129,10 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
-  domain = "vpc"
+  # vpc = true
+  # vpc is deprecated, removed
+  #domain = "vpc"
+  # domain command commented out, doesn't seem to be needed to replace vpc = true
 }
 
 resource "aws_eip_association" "hashicat" {
