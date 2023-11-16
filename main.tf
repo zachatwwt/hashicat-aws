@@ -10,7 +10,7 @@ terraform {
     #}
   }
 
-  }
+}
 
 #cant get provider now?
 #provider "hcp" {}
@@ -25,7 +25,7 @@ terraform {
 #}
 
 provider "aws" {
-  region  = var.region
+  region = var.region
   #access_key = data.hcp_vault_secrets_secret.aws_app.secret_value
   #secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
 }
@@ -35,7 +35,7 @@ resource "aws_vpc" "hashicat" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "${var.prefix}-vpc-${var.region}"
+    Name        = "${var.prefix}-vpc-${var.region}"
     environment = "Production"
   }
 }
@@ -149,7 +149,7 @@ resource "aws_instance" "hashicat" {
   vpc_security_group_ids      = [aws_security_group.hashicat.id]
 
   tags = {
-    Name = "${var.prefix}-hashicat-instance"
+    Name       = "${var.prefix}-hashicat-instance"
     Department = "devops"
   }
 }
