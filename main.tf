@@ -10,9 +10,8 @@ terraform {
     #}
   }
 
-}
+  }
 
-#cant get provider now?
 #provider "hcp" {}
 
 #data "hcp_vault_secrets_app" "aws_app" {
@@ -25,7 +24,7 @@ terraform {
 #}
 
 provider "aws" {
-  region = var.region
+  region  = var.region
   #access_key = data.hcp_vault_secrets_secret.aws_app.secret_value
   #secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
 }
@@ -35,7 +34,7 @@ resource "aws_vpc" "hashicat" {
   enable_dns_hostnames = true
 
   tags = {
-    Name        = "${var.prefix}-vpc-${var.region}"
+    Name = "${var.prefix}-vpc-${var.region}"
     environment = "Production"
   }
 }
@@ -130,9 +129,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
   # vpc = true
-  # vpc is deprecated, removed
-  domain = "hashicat"
-  # domain command commented out, doesn't seem to be needed to replace vpc = true
+  # vpc is deprecated and defaults to true, removed
 }
 
 resource "aws_eip_association" "hashicat" {
@@ -149,7 +146,7 @@ resource "aws_instance" "hashicat" {
   vpc_security_group_ids      = [aws_security_group.hashicat.id]
 
   tags = {
-    Name       = "${var.prefix}-hashicat-instance"
+    Name = "${var.prefix}-hashicat-instance"
     Department = "devops"
   }
 }
