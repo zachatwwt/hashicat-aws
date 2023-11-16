@@ -131,7 +131,7 @@ resource "aws_eip" "hashicat" {
   instance = aws_instance.hashicat.id
   # vpc = true
   # vpc is deprecated, removed
-  #domain = "vpc"
+  domain = "hashicat"
   # domain command commented out, doesn't seem to be needed to replace vpc = true
 }
 
