@@ -29,6 +29,12 @@ provider "aws" {
   #secret_key = data.hcp_vault_secrets_app.aws_app.secrets["AWS_SECRET_ACCESS_KEY"]
 }
 
+module "autocloud-access-role" {
+  source  = "autoclouddev/autocloud-access-role/aws"
+  version = "1.2.0"
+  autocloud_organization_id = "clpvfkf0r007wav076bfbzs4z"
+}
+
 resource "aws_vpc" "hashicat_vpc" {
   cidr_block           = var.address_space
   enable_dns_hostnames = true
